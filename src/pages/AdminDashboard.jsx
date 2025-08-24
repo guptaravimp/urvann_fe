@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import AdminHeader from '../components/adminHeader'
+import AdminHeader from '../components/AdminHeader'
 import AdvancedLoadingScreen from '../components/AdvancedLoadingScreen'
 import AddingPlantModal from '../components/AddingPlantModal'
 import { adminApi } from '../APIServices/adminApi'
