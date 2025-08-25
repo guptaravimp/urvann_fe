@@ -70,38 +70,6 @@ frontend/
 ```
 
 
-### API Services Structure
-
-#### `adminApi.js`
-```javascript
-// Admin-related API calls
-- getPlants()
-- createPlant(plantData)
-- updatePlant(id, plantData)
-- deletePlant(id)
-- getCategories()
-- createCategory(categoryData)
-```
-
-#### `homeApi.js`
-```javascript
-// Home page API calls
-- getPlants()
-- getCategories()
-- searchPlants(query)
-```
-
-### Configuration
-
-#### `apiConfig.js`
-```javascript
-// API base URL configuration
-// Error handling setup
-// Request/response interceptors
-```
-
-
-
 ```javascript
 // tailwind.config.js
 module.exports = {
