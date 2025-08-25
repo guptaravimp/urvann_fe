@@ -39,7 +39,9 @@
  
 
 
+## 📁 Project Structure
 
+```
 frontend/
 ├── public/                 # Static assets
 ├── src/
@@ -74,7 +76,6 @@ frontend/
 ├── vite.config.js          # Vite build configuration
 └── eslint.config.js        # ESLint configuration
 ```
-
 
 
 ### API Services Structure
