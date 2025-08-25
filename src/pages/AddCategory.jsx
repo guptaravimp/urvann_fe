@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+import toast, { Toaster } from 'react-hot-toast'
 import AdminHeader from '../components/AdminHeader'
 import CreatingCategoryModal from '../components/CreatingCategoryModal'
 import { adminApi } from '../APIServices/adminApi'
@@ -43,13 +44,16 @@ const AddCategory = () => {
       if (result.success) {
         const categoriesData = result.data?.categories
         setCategories(Array.isArray(categoriesData) ? categoriesData : [])
+        toast.success('Categories loaded successfully!')
       } else {
         console.error('Failed to fetch categories:', result.error)
         setCategories([])
+        toast.error('Failed to load categories')
       }
     } catch (error) {
       console.error('Error fetching categories:', error)
       setCategories([])
+      toast.error('Error loading categories')
     } finally {
       setIsLoadingCategories(false)
     }
@@ -71,13 +75,14 @@ const AddCategory = () => {
         setSubmitStatus('success')
         reset()
         fetchCategories() // Refresh the categories list
+        toast.success('🌿 Category created successfully!')
       } else {
         setSubmitStatus('error')
-        alert(`Error adding category: ${result.error}`)
+        toast.error(`Error adding category: ${result.error}`)
       }
     } catch (error) {
       setSubmitStatus('error')
-      alert('Error adding category. Please try again.')
+      toast.error('Error adding category. Please try again.')
     } finally {
       setIsSubmitting(false)
       setShowCreatingCategoryModal(false)
@@ -86,6 +91,30 @@ const AddCategory = () => {
 
   return (
     <>
+      <Toaster 
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: '#363636',
+            color: '#fff',
+          },
+          success: {
+            duration: 4000,
+            style: {
+              background: '#10B981',
+              color: '#fff',
+            },
+          },
+          error: {
+            duration: 4000,
+            style: {
+              background: '#EF4444',
+              color: '#fff',
+            },
+          },
+        }}
+      />
       <CreatingCategoryModal isOpen={showCreatingCategoryModal} />
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
@@ -280,13 +309,7 @@ const AddCategory = () => {
                   >
                     <div className="flex items-center justify-between mb-2">
                       <h3 className="font-medium text-gray-900">{category.categoryName}</h3>
-                      <span className={`px-2 py-1 text-xs rounded-full ${
-                        category.isActive 
-                          ? 'bg-green-100 text-green-800' 
-                          : 'bg-gray-100 text-gray-600'
-                      }`}>
-                        {category.isActive ? 'Active' : 'Inactive'}
-                      </span>
+                      
                     </div>
                     {category.description && (
                       <p className="text-sm text-gray-600 line-clamp-2">{category.description}</p>

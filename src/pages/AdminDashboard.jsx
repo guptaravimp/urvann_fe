@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import toast, { Toaster } from 'react-hot-toast'
 import AdminHeader from '../components/AdminHeader'
 import AdvancedLoadingScreen from '../components/AdvancedLoadingScreen'
 import AddingPlantModal from '../components/AddingPlantModal'
 import { adminApi } from '../APIServices/adminApi'
-import { Leaf, Plus, BarChart3, Package, Users, TrendingUp, Upload, CheckCircle, AlertCircle, Sprout, Image, Package2, Tag, FileText, CloudUpload } from 'lucide-react'
+import { Leaf, Plus, BarChart3, Package,  CheckCircle, AlertCircle, Sprout, Image, Package2, Tag, FileText, CloudUpload } from 'lucide-react'
 
 const AdminDashboard = () => {
   const navigate = useNavigate()
@@ -43,13 +44,16 @@ const AdminDashboard = () => {
         const categoriesData = result.data?.categories ;
         console.log("categories data is ",categoriesData)
         setCategories(Array.isArray(categoriesData) ? categoriesData : [])
+        toast.success('Categories loaded successfully!')
       } else {
         console.error('Failed to fetch categories:', result.error)
         setCategories([])
+        toast.error('Failed to load categories')
       }
     } catch (error) {
       console.error('Error fetching categories:', error)
       setCategories([])
+      toast.error('Error loading categories')
     } finally {
       setTimeout(() => {
         setIsLoading(false)
@@ -61,7 +65,6 @@ const AdminDashboard = () => {
     fetchCategories()
   }, [])
 
-
   const handleCategoryToggle = (categoryId) => {
     setSelectedCategories(prev => {
       if (prev.includes(categoryId)) {
@@ -72,7 +75,6 @@ const AdminDashboard = () => {
     })
   }
 
-
   const isCategorySelected = (categoryId) => {
     return selectedCategories.includes(categoryId)
   }
@@ -82,7 +84,7 @@ const AdminDashboard = () => {
     if (file) {
       const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
       if (!allowedTypes.includes(file.type)) {
-        alert('Please select a JPEG, JPG, PNG, or WebP image.')
+        toast.error('Please select a JPEG, JPG, PNG, or WebP image.')
         e.target.value = ''
         return
       }
@@ -107,7 +109,7 @@ const AdminDashboard = () => {
     if (file && file.type.startsWith('image/')) {
       const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp']
       if (!allowedTypes.includes(file.type)) {
-        alert('Please select a JPEG, JPG, PNG, or WebP image.')
+        toast.error('Please select a JPEG, JPG, PNG, or WebP image.')
         return
       }
       
@@ -122,6 +124,7 @@ const AdminDashboard = () => {
   }
 
   const handleCreateCategory = async () => {
+    toast.success('Redirecting to category creation page...')
     navigate('/addCategory')
   }
 
@@ -130,10 +133,9 @@ const AdminDashboard = () => {
       setIsSubmittingForm(true)
       setShowAddingModal(true)
       console.log('Modal should be visible now:', true)
-      
 
       if (selectedCategories.length === 0) {
-        alert('Please select at least one category')
+        toast.error('Please select at least one category')
         setIsSubmittingForm(false)
         setShowAddingModal(false)
         return
@@ -141,7 +143,6 @@ const AdminDashboard = () => {
       
       console.log('Selected categories:', selectedCategories)
       console.log('Form data:', data)
-      
 
       let imageUrl = ''
       if (selectedFile) {
@@ -149,18 +150,17 @@ const AdminDashboard = () => {
         if (uploadResult.success) {
           imageUrl = uploadResult.data.imageUrl
         } else {
-          alert(`Error uploading image: ${uploadResult.error}`)
+          toast.error(`Error uploading image: ${uploadResult.error}`)
           setIsSubmittingForm(false)
           setShowAddingModal(false)
           return
         }
       } else {
-        alert('Please select an image for the plant')
+        toast.error('Please select an image for the plant')
         setIsSubmittingForm(false)
         setShowAddingModal(false)
         return
       }
-
 
       const plantData = {
         ...data,
@@ -171,7 +171,6 @@ const AdminDashboard = () => {
 
       console.log('Plant data being sent to backend:', plantData)
 
-
       const result = await adminApi.addPlant(plantData)
       
       console.log('Backend response:', result)
@@ -181,14 +180,14 @@ const AdminDashboard = () => {
         setSelectedFile(null)
         setImagePreview(null)
         setSelectedCategories([])
-
+        toast.success(' Plant added successfully!')
       } else {
         console.error('Failed to add plant:', result.error)
-        alert(`Error adding plant: ${result.error}`)
+        toast.error(`Error adding plant: ${result.error}`)
       }
     } catch (error) {
       console.error('Error submitting form:', error)
-      alert('Error adding plant. Please try again.')
+      toast.error('Error adding plant. Please try again.')
     } finally {
       setIsSubmittingForm(false)
       setShowAddingModal(false)
@@ -197,6 +196,30 @@ const AdminDashboard = () => {
 
   return (
     <>
+      <Toaster 
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: '#363636',
+            color: '#fff',
+          },
+          success: {
+            duration: 4000,
+            style: {
+              background: '#10B981',
+              color: '#fff',
+            },
+          },
+          error: {
+            duration: 4000,
+            style: {
+              background: '#EF4444',
+              color: '#fff',
+            },
+          },
+        }}
+      />
       <AddingPlantModal isOpen={showAddingModal} />
       {isLoading ? (
         <AdvancedLoadingScreen 
@@ -216,17 +239,12 @@ const AdminDashboard = () => {
 
       <AdminHeader />
 
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-green-600 mb-2">Admin Dashboard</h1>
           <p className="text-gray-600">Manage your plant inventory and track business performance</p>
         </div>
-
-
-       
-
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
@@ -268,7 +286,6 @@ const AdminDashboard = () => {
                     )}
                   </div>
 
-
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
                       <Tag className="h-4 w-4 mr-2 text-green-600" />
@@ -296,14 +313,12 @@ const AdminDashboard = () => {
                     )}
                   </div>
 
-
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
                       <Image className="h-4 w-4 mr-2 text-green-600" />
                       Plant Image <span className="text-red-500">*</span>
                     </label>
                     
-
                     <div 
                       className={`relative border-2 border-dashed rounded-lg p-6 text-center transition-all duration-200 ${
                         selectedFile 
@@ -364,7 +379,6 @@ const AdminDashboard = () => {
                     )}
                   </div>
 
-
                   {imagePreview && (
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
@@ -380,7 +394,6 @@ const AdminDashboard = () => {
                       </div>
                     </div>
                   )}
-
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
@@ -404,7 +417,6 @@ const AdminDashboard = () => {
                       </p>
                     )}
                   </div>
-
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
@@ -471,7 +483,6 @@ const AdminDashboard = () => {
                     )}
                   </div>
 
-
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
                       <Package className="h-4 w-4 mr-2 text-green-600" />
@@ -485,7 +496,6 @@ const AdminDashboard = () => {
                       <option value="Out of Stock">Out of Stock</option>
                     </select>
                   </div>
-
 
                   <div className="flex justify-end pt-4">
                     <button
@@ -505,7 +515,6 @@ const AdminDashboard = () => {
               </div>
             </div>
           </div>
-
 
           <div className="lg:col-span-1">
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
@@ -539,9 +548,6 @@ const AdminDashboard = () => {
                 </button>
               </div>
             </div>
-
-
-           
           </div>
         </div>
       </div>
