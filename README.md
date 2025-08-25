@@ -1,32 +1,3 @@
-To Run the frontend Project Folder 
-step 1-> clone this repo 
-step2-> install all packages
-```
-npm install
-```
-
-step3-> run this project
-```
-npm run dev
-```
-
-# Urvann Plant App - Frontend
-
-A modern, responsive React.js frontend application for the Urvann Plant App, featuring a beautiful UI with plant management, category management, and admin dashboard functionality.
-
-## 🚀 Features
-
-- **Modern UI/UX**: Beautiful, responsive design with Tailwind CSS
-- **Plant Catalog**: Browse and view plant details with images
-- **Admin Dashboard**: Complete plant and category management interface
-- **Image Upload**: Drag-and-drop image upload functionality
-- **Category Management**: Create and manage plant categories
-- **Advanced Loading**: Sophisticated loading screens and animations
-- **Form Handling**: React Hook Form for efficient form management
-- **Toast Notifications**: User-friendly feedback with React Hot Toast
-- **Routing**: React Router for seamless navigation
-- **State Management**: Redux Toolkit for global state management
-
 ## 🛠️ Tech Stack
 
 - **Framework**: React 19.1.1 with Vite 7.1.2
@@ -48,7 +19,7 @@ A modern, responsive React.js frontend application for the Urvann Plant App, fea
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone [<repository-url>](https://github.com/guptaravimp/urvann_fe.git)
    cd frontend
    ```
 
@@ -69,10 +40,7 @@ A modern, responsive React.js frontend application for the Urvann Plant App, fea
    npm run dev
    ```
 
-5. **Build for production**
-   ```bash
-   npm run build
-   ```
+
 
 ## 📁 Project Structure
 
