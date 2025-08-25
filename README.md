@@ -1,14 +1,3 @@
-## 🛠️ Tech Stack
-
-- **Framework**: React 19.1.1 with Vite 7.1.2
-- **Styling**: Tailwind CSS 3.4.17
-- **State Management**: Redux Toolkit 2.8.2
-- **Routing**: React Router DOM 7.8.2
-- **Forms**: React Hook Form 7.62.0
-- **Notifications**: React Hot Toast 2.6.0
-- **Icons**: Lucide React 0.541.0
-- **Development**: ESLint 9.33.0, PostCSS 8.5.6
-
 ## 📋 Prerequisites
 
 - Node.js (>=16.0.0)
