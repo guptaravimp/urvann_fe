@@ -29,10 +29,21 @@
    ```
 
 3. **Environment Configuration**
-   Create a `.env` file in the root directory:
+   Create a `src/config/config.js` file in the root directory:
    ```env
-   VITE_API_BASE_URL=http://localhost:5000/api/v1
-   VITE_CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
+   const getApiBaseUrl = () => {
+   // return 'https://urvann-be.vercel.app/api/v1';
+   return 'http://localhost:5000/api/v1';
+};
+
+export const API_CONFIG = {
+  BASE_URL: getApiBaseUrl(),
+  PLANT_URL: `${getApiBaseUrl()}/plant`,
+  UPLOAD_URL: `${getApiBaseUrl()}/upload`,
+};
+
+export default API_CONFIG;
+
    ```
 
 4. **Start the development server**
