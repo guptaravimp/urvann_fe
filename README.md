@@ -20,7 +20,7 @@
 1. **Clone the repository**
    ```bash
    git clone https://github.com/guptaravimp/urvann_fe.git
-   cd frontend
+   cd urvann_fe
    ```
 
 2. **Install dependencies**
