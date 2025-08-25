@@ -19,7 +19,7 @@
 
 1. **Clone the repository**
    ```bash
-   git clone [<repository-url>](https://github.com/guptaravimp/urvann_fe.git)
+   git clone https://github.com/guptaravimp/urvann_fe.git
    cd frontend
    ```
 
