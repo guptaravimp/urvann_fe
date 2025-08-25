@@ -30,8 +30,8 @@
 
 3. **Environment Configuration**
    Create a `src/config/config.js` file in the root directory:
-   ```env
-   const getApiBaseUrl = () => {
+   ```
+     const getApiBaseUrl = () => {
    // return 'https://urvann-be.vercel.app/api/v1';
    return 'http://localhost:5000/api/v1';
 };
@@ -43,10 +43,10 @@ export const API_CONFIG = {
 };
 
 export default API_CONFIG;
-
    ```
+   
 
-4. **Start the development server**
+5. **Start the development server**
    ```bash
    npm run dev
    ```
