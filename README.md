@@ -30,32 +30,16 @@
 
 3. **Environment Configuration**
    Create a `src/config/config.js` file in the root directory:
+   change the backend base url to local in this page 
    ```
      const getApiBaseUrl = () => {
    // return 'https://urvann-be.vercel.app/api/v1';
    return 'http://localhost:5000/api/v1';
-};
-
-export const API_CONFIG = {
-  BASE_URL: getApiBaseUrl(),
-  PLANT_URL: `${getApiBaseUrl()}/plant`,
-  UPLOAD_URL: `${getApiBaseUrl()}/upload`,
-};
-
-export default API_CONFIG;
-   ```
-   
-
-5. **Start the development server**
-   ```bash
-   npm run dev
-   ```
+   }:
+ 
 
 
 
-## 📁 Project Structure
-
-```
 frontend/
 ├── public/                 # Static assets
 ├── src/
