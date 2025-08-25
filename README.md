@@ -36,7 +36,10 @@
    // return 'https://urvann-be.vercel.app/api/v1';
    return 'http://localhost:5000/api/v1';
    }:
- 
+ 4, **Run the app
+ ```
+npm run dev
+```
 
 
 ## 📁 Project Structure
